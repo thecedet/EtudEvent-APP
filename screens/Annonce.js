@@ -1,5 +1,5 @@
 import React,{ Component } from "react"
-import {View, StyleSheet, ScrollView,ActivityIndicator} from "react-native"
+import {View, StyleSheet, ScrollView,ActivityIndicator,TouchableHighlight} from "react-native"
 
 import Header from "../components/annonce/header"
 import Annonce from "../components/annonce/annonce"
@@ -47,7 +47,7 @@ export default class AnnonceScreen extends Component {
         </View>
       ) : (
         <View style={{flex:1}}>
-          <Header/>
+          <TouchableHighlight><Header/></TouchableHighlight>
 
           <View style={{flex:1}}>
             

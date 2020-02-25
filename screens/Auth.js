@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet,View,KeyboardAvoidingView, ActivityIndicator, StatusBar,TouchableHighlight,Text } from 'react-native';
+import { StyleSheet,View,KeyboardAvoidingView, ActivityIndicator, StatusBar,TouchableHighlight,Text,AsyncStorage } from 'react-native';
 import GradientButton from 'react-native-gradient-buttons';
 
 import Header from "../components/auth/header"
@@ -27,6 +27,11 @@ export default class App extends Component {
         password: ""
       }
     }
+  }
+
+  static async getDerivedStateFromProps(props) {
+    const token = await AsyncStorage.getItem("@auth:token")
+    if(token !== null) props.navigation.push("Annonce")
   }
 
   async registerForPushNotification(email) {
@@ -69,6 +74,7 @@ export default class App extends Component {
       if(response.result === "ERR_INVALID_INFO") await error.push({emailLogin: "invalide info"},{passwordLogin: "invalide info"})
       if(response.result === "ERR_CHECKED") await error.push({emailLogin: "compte pas check"})
       if(response.result === "OK") {
+        await AsyncStorage.setItem("@auth:token", "connect")
         this.registerForPushNotification(emailLogin)
         this.props.navigation.push("Annonce")
       }
