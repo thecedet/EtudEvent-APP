@@ -1,5 +1,5 @@
 import React,{ Component } from "react"
-import {View, StyleSheet, ScrollView,ActivityIndicator,TouchableHighlight} from "react-native"
+import {View, StyleSheet, ScrollView,ActivityIndicator,TouchableHighlight,AsyncStorage} from "react-native"
 
 import Header from "../components/annonce/header"
 import Annonce from "../components/annonce/annonce"
@@ -47,7 +47,15 @@ export default class AnnonceScreen extends Component {
         </View>
       ) : (
         <View style={{flex:1}}>
-          <TouchableHighlight><Header/></TouchableHighlight>
+          <TouchableHighlight
+            underlayColor="transparent"
+            onPress={() => {
+              AsyncStorage.removeItem("@auth:token")
+              this.props.navigation.push("Auth")
+            }}
+          >
+            <Header/>
+          </TouchableHighlight>
 
           <View style={{flex:1}}>
             
