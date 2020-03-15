@@ -16,7 +16,7 @@ export default class Header extends Component {
         <View style={style.image}>
           <Image
             source={require("../../assets/icon.png")}
-            style={{width:100, height:100}}
+            style={{width:150, height:150}}
           />
         </View>
         <View style={style.navigation}>

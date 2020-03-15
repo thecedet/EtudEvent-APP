@@ -43,7 +43,7 @@ const style = StyleSheet.create({
   container: {
   	width: "85%",
     marginLeft: "7.5%",
-    paddingTop: 20
+    paddingVertical:10
   },
   box: {
   	backgroundColor: "white",
@@ -51,12 +51,12 @@ const style = StyleSheet.create({
     elevation: 5,
 	},
 	input: {
-		height: 60,
+		height: 50,
 		borderColor: '#C9C9C9',
 		borderWidth: 1,
 		borderRadius: 5,
     paddingStart: 15,
-    fontSize: 18
+    fontSize: 18,
   },
   label: {
     fontSize: 20,

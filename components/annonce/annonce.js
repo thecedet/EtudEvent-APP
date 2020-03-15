@@ -1,90 +1,58 @@
 import React,{Component} from "react"
 import {View, Text, StyleSheet, Image} from "react-native"
 
-export default class Annonce extends Component {
-  constructor(props) {
-    super(props)
-  } 
-  render() {
-    return(
-      <View style={style.container}>
-        <View style={style.containerPhoto}>
-          <Image
-            style={style.image}
-            source={{uri: "https://cdn.discordapp.com/attachments/664893016888049728/668566531512336404/IMG_20200113_123003.jpg"}}
-          />
-        </View>
-        <View style={style.containerText}>
-          <Text style={style.title}>{this.props.contenu.title}</Text>
-          <Text numberOfLines={2} style={style.text}>{this.props.contenu.data}</Text>
-        </View>
-        <View style={style.containerOptions}>
-          <Text style={style.textOption}>&#xf141;</Text>
-        </View>
-      </View>
-    )
-  }
+export default function Annonce(props) {
+  const days = ["Lundi","Mardi","Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+  const month = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+  const date = new Date(props.data.date)
+  return(
+    <View style={annonce.container}>
+      <Image style={annonce.image} source={{uri:`http://etudevent-api.herokuapp.com/cdn/annonce/${props.data.image || "3.jpg"}`}}/>
+      <View style={annonce.imageFiltre}/>
+      <Text style={annonce.title}>{props.data.title}</Text>
+      <Text style={annonce.date}>{days[date.getDay()-1]} {date.getDate()} {month[date.getMonth()]} {date.getFullYear()} </Text>
+    </View>
+  )
 }
 
-const color = "#E89C5B"
-
-const style = StyleSheet.create({
+const annonce = StyleSheet.create({
   container: {
+    height: 160,
     width: "90%",
-    height: 120,
-    backgroundColor: color,
-    flexDirection: "row",
     borderRadius: 15,
-    borderWidth: 1,
-    borderColor: color,
-    marginTop: 7,
-    marginBottom:7,
-    elevation: 20,
-    opacity: 0.9,
-    
-  },
-  containerPhoto: {
-    flex: 2,
-    borderTopLeftRadius: 15,
-    borderBottomLeftRadius: 15,
-    borderWidth: 2,
-    borderColor: "transparent",
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  containerText: {
-    flex: 6,
-    padding: 10,
-  },
-  containerOptions: {
-    flex: 1.5,
-    borderTopRightRadius: 15,
-    borderBottomRightRadius: 15,
-    borderWidth: 2,
-    borderColor: "transparent"
+    alignSelf: "center",
+    marginVertical: 10,
+    justifyContent: "flex-end",
+    elevation:10
   },
   image: {
-    width: 60,
-    height: 60,
-    borderRadius: 360,
-    marginTop: 10
+    height: "100%",
+    width: "100%",
+    borderRadius: 15,
+    alignSelf: "center",
+    position: "absolute",
+    backgroundColor: "#71256f",
   },
-  textOption: {
-    fontFamily: "Awesome",
-    color: "white",
-    fontSize: 20,
-    textAlign: "center",
-    marginTop: 10
-  },
-  text: {
-    color: "white",
-    fontSize: 15,
-    overflow: "hidden"
+  imageFiltre: {
+    backgroundColor: "#71256f",
+    height: "100%",
+    width: "100%",
+    borderRadius: 15,
+    alignSelf: "center",
+    position: "absolute",
+    opacity: .6
   },
   title: {
-    fontWeight: "bold",
-    color : "white",
-    fontSize: 20,
-    marginBottom: 10
+    color: "white",
+    fontSize: 30,
+    padding: 15,
+    paddingBottom: 0,
+    fontFamily: "Helvetica",
+  },
+  date: {
+    color: "white",
+    padding: 15,
+    fontFamily: "Helvetica",
+    paddingTop: 5
   }
 })
